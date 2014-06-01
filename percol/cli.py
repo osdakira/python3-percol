@@ -122,15 +122,15 @@ def set_proper_locale(options):
 
 def read_input(filename, encoding, reverse=False):
     if filename:
-        stream = open(filename, "r")
+        stream = open(filename, "rb")
     else:
-        stream = sys.stdin
+        stream = sys.stdin.buffer
     if reverse:
         lines = reversed(stream.readlines())
     else:
         lines = stream
     for line in lines:
-        yield str(line.rstrip("\r\n"), encoding, "replace")
+        yield line.decode(encoding, "replace").rstrip("\r\n")
     stream.close()
 
 def decide_match_method(options):
