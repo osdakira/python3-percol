@@ -1,3 +1,13 @@
+# percol for python3
+
+[mooz/percol](https://github.com/mooz/percol) cannot be used by python3.
+
+This is translated percol into python3.
+
+`pip install git+https://github.com/osdakira/python3-percol`
+
+The following is original README.
+
 # percol
 
                                     __
