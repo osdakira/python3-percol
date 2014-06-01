@@ -167,13 +167,13 @@ class SelectorModel(object):
     # ------------------------------------------------------------ #
 
     def append_char_to_query(self, ch):
-        self.query += chr(ch).decode(self.percol.encoding)
+        self.query += chr(ch)
         self.forward_char()
 
     def insert_char(self, ch):
         q = self.query
         c = self.caret
-        self.query = q[:c] + chr(ch).decode(self.percol.encoding) + q[c:]
+        self.query = q[:c] + chr(ch) + q[c:]
         self.set_caret(c + 1)
 
     def insert_string(self, string):
