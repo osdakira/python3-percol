@@ -59,7 +59,7 @@ def load_rc(percol, path = None, encoding = 'utf-8'):
 def eval_string(percol, string_to_eval, encoding = 'utf-8'):
     try:
         import types
-        if string_to_eval.__class__ != types.UnicodeType:
+        if string_to_eval.__class__ != str:
             string_to_eval = string_to_eval.decode(encoding)
         exec(string_to_eval, locals())
     except Exception as e:
@@ -130,7 +130,7 @@ def read_input(filename, encoding, reverse=False):
     else:
         lines = stream
     for line in lines:
-        yield unicode(line.rstrip("\r\n"), encoding, "replace")
+        yield str(line.rstrip("\r\n"), encoding, "replace")
     stream.close()
 
 def decide_match_method(options):
@@ -154,7 +154,7 @@ def main():
 
     def exit_program(msg = None, show_help = True):
         if not msg is None:
-            print("\n" + msg + "\n")
+            print(("\n" + msg + "\n"))
         if show_help:
             parser.print_help()
         exit(1)

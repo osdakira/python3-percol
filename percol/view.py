@@ -145,8 +145,8 @@ class SelectorView(object):
         else:
             return self.display.Y_END
 
-    PROMPT  = u"QUERY> %q"
-    RPROMPT = u"(%i/%I) [%n/%N]"
+    PROMPT  = "QUERY> %q"
+    RPROMPT = "(%i/%I) [%n/%N]"
 
     def do_display_prompt(self, format,
                           y_offset = 0, x_offset = 0,
@@ -211,15 +211,15 @@ class SelectorView(object):
         "k" : lambda self, **args: self.percol.last_key
     }
 
-    format_pattern = re.compile(ur'%([a-zA-Z%])')
+    format_pattern = re.compile(r'%([a-zA-Z%])')
     def format_prompt_string(self, s, offset = 0):
         def formatter(matchobj):
             al = matchobj.group(1)
-            if self.prompt_replacees.has_key(al):
+            if al in self.prompt_replacees:
                 res = self.prompt_replacees[al](self, matchobj = matchobj, offset = offset)
-                return (res if res.__class__ == types.UnicodeType
-                        else unicode(str(res), self.percol.encoding, 'replace'))
+                return (res if res.__class__ == str
+                        else str(str(res), self.percol.encoding, 'replace'))
             else:
-                return u""
+                return ""
 
         return re.sub(self.format_pattern, formatter, s)

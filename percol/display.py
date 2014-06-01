@@ -35,7 +35,7 @@ FG_COLORS = {
     "white"   : curses.COLOR_WHITE,
 }
 
-BG_COLORS = dict(("on_" + name, value) for name, value in FG_COLORS.iteritems())
+BG_COLORS = dict(("on_" + name, value) for name, value in FG_COLORS.items())
 
 ATTRS = {
     "altcharset" : curses.A_ALTCHARSET,
@@ -86,11 +86,11 @@ def screen_len(s, beg = None, end = None):
         end = len(s[beg:end].expandtabs())
         s = s.expandtabs()
 
-    if s.__class__ != types.UnicodeType:
+    if s.__class__ != str:
         return end - beg
 
     dis_len = end - beg
-    for i in xrange(beg, end):
+    for i in range(beg, end):
         if unicodedata.east_asian_width(s[i]) in ("W", "F"):
             dis_len += 1
 
@@ -164,8 +164,8 @@ class Display(object):
     # ============================================================ #
 
     def init_color_pairs(self):
-        for fg_s, fg in FG_COLORS.iteritems():
-            for bg_s, bg in BG_COLORS.iteritems():
+        for fg_s, fg in FG_COLORS.items():
+            for bg_s, bg in BG_COLORS.items():
                 if not (fg == bg == 0):
                     curses.init_pair(self.get_pair_number(fg, bg), fg, bg)
 
@@ -295,10 +295,10 @@ class Display(object):
         self.screen.refresh()
 
     def get_raw_string(self, s):
-        return s.encode(self.encoding) if s.__class__ == types.UnicodeType else s
+        return s.encode(self.encoding) if s.__class__ == str else s
 
     def addnstr(self, y, x, s, n, style):
-        if style.__class__ != types.IntType:
+        if style.__class__ != int:
             style = self.attrs_to_style(style)
 
         # Compute bytes count of the substring that fits in the screen
@@ -326,19 +326,19 @@ if __name__ == "__main__":
     display.add_aligned_string_markup("<underline><bold><red>foo</red> <blue>bar</blue> <green>baz<green/> <cyan>qux</cyan></bold></underline>",
                                       x_align = "center", y_offset = 3)
 
-    display.add_aligned_string_markup(u"ああ，<on_green>なんて<red>赤くて<bold>太くて</on_green>太い，</bold>そして赤い</red>リンゴ",
+    display.add_aligned_string_markup("ああ，<on_green>なんて<red>赤くて<bold>太くて</on_green>太い，</bold>そして赤い</red>リンゴ",
                                       y_offset = 4,
                                       x_offset = -20,
                                       x_align = "center",
                                       fill = True, fill_char = "*")
 
-    display.add_aligned_string(u"こんにちは",
+    display.add_aligned_string("こんにちは",
                                y_offset = 5,
                                x_offset = 0,
                                x_align = "right",
                                fill = True, fill_char = '*', fill_style = display.attrs_to_style(("bold", "white", "on_green")))
 
-    display.add_aligned_string(u" foo bar baz qux ",
+    display.add_aligned_string(" foo bar baz qux ",
                                x_align = "center", y_align = "center",
                                style = display.attrs_to_style(("bold", "white", "on_default")),
                                fill = True, fill_char = '-')

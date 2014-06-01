@@ -48,12 +48,12 @@ class SelectorModel(object):
     # ============================================================ #
 
     def setup_results(self, query):
-        self.query   = self.old_query = query or u""
+        self.query   = self.old_query = query or ""
         self.results = self.finder.get_results(self.query)
         self.marks   = {}
 
     def setup_caret(self, caret):
-        if isinstance(caret, types.StringType) or isinstance(caret, types.UnicodeType):
+        if isinstance(caret, bytes) or isinstance(caret, str):
             try:
                 caret = int(caret)
             except ValueError:
@@ -82,7 +82,7 @@ class SelectorModel(object):
     def should_search_again(self):
         return self.query != self.old_query or self.search_forced
 
-    old_query = u""
+    old_query = ""
     def do_search(self, query):
         with self.percol.global_lock:
             self.index = 0

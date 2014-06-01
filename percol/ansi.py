@@ -80,12 +80,12 @@ if __name__ == "__main__":
         "baaaaa<green>a<blue>aa</green>a</blue>aaaaaaa", # unmatch
         "baaaaa<green>a<blue>aa</blue>a</green>aaaaaaa",
         "<underline>hello \\<red>red\\</red> normal</underline>",  # escape
-        u"マルチ<magenta>バイト<blue>文字</blue>の</magenta>テスト", # multibyte
+        "マルチ<magenta>バイト<blue>文字</blue>の</magenta>テスト", # multibyte
     )
 
     for test in tests:
         try:
             print("----------------------------------------------------------")
-            print(markup(test))
+            print((markup(test)))
         except Exception as e:
-            print("fail: " + str(e))
+            print(("fail: " + str(e)))

@@ -127,7 +127,7 @@ if __name__ == "__main__":
             "on_white"   : 47,
         }
 
-        if color.__class__ == types.StringType:
+        if color.__class__ == bytes:
             try:
                 color = colors[color]
             except:
@@ -145,13 +145,13 @@ if __name__ == "__main__":
         "baaaaa<green>a<blue>aa</green>a</blue>aaaaaaa", # unmatch
         "baaaaa<green>a<blue>aa</blue>a</green>aaaaaaa",
         "hello \\<red>red\\</red> normal",  # escape
-        u"マルチ<magenta>バイト<blue>文字</blue>の</magenta>テスト", # multibyte
+        "マルチ<magenta>バイト<blue>文字</blue>の</magenta>テスト", # multibyte
     )
 
     for test in tests:
         try:
             print("----------------------------------------------------------")
-            print("Testing [%s]" % color(test, "cyan"))
-            print(color("pass: " + pprint.pformat(parser.parse(test)), "green"))
+            print(("Testing [%s]" % color(test, "cyan")))
+            print((color("pass: " + pprint.pformat(parser.parse(test)), "green")))
         except Exception as e:
-            print(color("fail: " + str(e), "red"))
+            print((color("fail: " + str(e), "red")))

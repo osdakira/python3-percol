@@ -27,8 +27,8 @@ if __name__ == "__main__":
         curses.start_color()
 
         def get_fg_bg():
-            for bg in xrange(0, curses.COLORS):
-                for fg in xrange(0, curses.COLORS):
+            for bg in range(0, curses.COLORS):
+                for fg in range(0, curses.COLORS):
                     yield bg, fg
 
         def pair_number(fg, bg):

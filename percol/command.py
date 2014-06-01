@@ -95,7 +95,7 @@ class SelectorCommand(object):
         self.select_successor()
 
     def __get_all_mark_indices(self):
-        return xrange(self.model.results_count)
+        return range(self.model.results_count)
 
     def mark_all(self):
         for mark_index in self.__get_all_mark_indices():
@@ -170,7 +170,7 @@ class SelectorCommand(object):
         self.model.query = self.model.query[:self.model.caret]
 
     def clear_query(self):
-        self.model.query = u""
+        self.model.query = ""
         self.model.set_caret(0)
 
     def transpose_chars(self):

@@ -243,7 +243,7 @@ class Percol(object):
             self.keymap = {}
         else:
             self.keymap = dict(self.keymap)
-        for key, cmd in keymap.iteritems():
+        for key, cmd in keymap.items():
             self.keymap[key] = cmd
 
     # default
