@@ -218,7 +218,7 @@ class SelectorView(object):
             if al in self.prompt_replacees:
                 res = self.prompt_replacees[al](self, matchobj = matchobj, offset = offset)
                 return (res if res.__class__ == str
-                        else str(str(res), self.percol.encoding, 'replace'))
+                        else str(res))
             else:
                 return ""
 
